@@ -1,0 +1,17 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "./auth/tsconfig.json"
+    },
+    {
+      "path": "./container/tsconfig.json"
+    },
+    {
+      "path": "./dashboard/tsconfig.json"
+    },
+    {
+      "path": "./marketing/tsconfig.json"
+    }
+  ]
+}

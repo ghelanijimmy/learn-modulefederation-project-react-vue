@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": true,
+    "module": "ESNext",
+    "target": "ESNext",
+    "allowJs": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+    "moduleResolution": "Node",
+    "rootDir": ".",
+    "outDir": "dist",
+    "composite": true,
+    "jsx": "react",
+    "esModuleInterop": true
+  },
+  "include": ["src/**/*"],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs"
+    }
+  }
+}
