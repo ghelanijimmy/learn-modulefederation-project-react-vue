@@ -1,8 +1,12 @@
 import React from "react";
+import { MarketingApp } from "./components/MarketingApp";
+import { AppMarkers } from "./components/AppMarkers";
 export const App = () => {
   return (
     <div>
-      <h1>Hi there!</h1>
+      <AppMarkers appTitle="MarketingApp">
+        <MarketingApp />
+      </AppMarkers>
     </div>
   );
 };
