@@ -12,7 +12,9 @@
     "moduleResolution": "Node",
     "rootDir": ".",
     "outDir": "dist",
-    "composite": true
+    "composite": true,
+    "jsx": "react",
+    "esModuleInterop": true
   },
   "include": ["src/**/*"],
   "ts-node": {

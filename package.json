@@ -4,12 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:marketing": "cd marketing && npm start"
+    "start": "concurrently npm:start:*",
+    "start:marketing": "cd marketing && npm start",
+    "start:container": "cd container && npm start"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "concurrently": "^8.0.1",
     "eslint": "^8.37.0",
     "prettier": "^2.8.7"
   },
