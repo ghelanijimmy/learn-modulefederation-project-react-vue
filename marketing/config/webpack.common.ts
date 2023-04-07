@@ -1,3 +1,5 @@
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
 module.exports = {
   module: {
     rules: [
@@ -23,4 +25,10 @@ module.exports = {
     extensions: [".tsx", ".ts", ".js"],
   },
   entry: "./src/index.ts",
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "./public/index.html",
+      historyApiFallback: true,
+    }),
+  ],
 };
