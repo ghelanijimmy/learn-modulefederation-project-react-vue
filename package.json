@@ -6,7 +6,10 @@
   "scripts": {
     "start": "concurrently npm:start:*",
     "start:marketing": "cd marketing && npm start",
-    "start:container": "cd container && npm start"
+    "start:container": "cd container && npm start",
+    "build": "concurrently npm:build:*",
+    "build:marketing": "cd marketing && npm run build",
+    "build:container": "cd container && npm run build"
   },
   "keywords": [],
   "author": "",
