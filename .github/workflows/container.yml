@@ -19,8 +19,8 @@ jobs:
         with:
           node-version: '19.7.0'
           cache: 'npm'
-          cache-dependency-path: 'package-lock.json'
-      - run: npm install
+          cache-dependency-path: './package-lock.json'
+      - run: npm ci
       - run: npm run build:container
 
       - uses: shinyinc/action-aws-cli@v1.2
