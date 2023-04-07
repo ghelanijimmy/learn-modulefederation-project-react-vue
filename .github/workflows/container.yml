@@ -2,13 +2,11 @@ name: deploy-container
 on:
   pull_request:
     branches:
-      - master
       - main
     paths:
       - 'container/**'
   push:
     branches:
-      - master
       - main
     paths:
       - 'container/**'
