@@ -18,8 +18,13 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '19.7.0'
-          cache: 'npm'
-          cache-dependency-path: './package-lock.json'
+      - uses: actions/cache@v2
+        id: npm-cache
+        with:
+          path: ${{ steps.npm-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
       - run: npm ci
       - run: npm run build:container
 
