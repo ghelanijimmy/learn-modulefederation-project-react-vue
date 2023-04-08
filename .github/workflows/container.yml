@@ -30,10 +30,10 @@ jobs:
           restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-
       - name: Install dependencies
         if: ${{ steps.npm-cache.outputs.cache-hit != 'true' }}
-        run: npm install
-      - name: Install ts-node if cache-hit is true
+        run: npm ci
+      - name: Install dependencies
         if: ${{ steps.npm-cache.outputs.cache-hit == 'true' }}
-        run: npm install ts-node
+        run: npm ci --prefer-offline
 
       - name: Build Container
         run: npm run build:container
