@@ -31,9 +31,6 @@ jobs:
       - name: Install dependencies
         if: ${{ steps.npm-cache.outputs.cache-hit != 'true' }}
         run: npm ci
-      - name: Install dependencies
-        if: ${{ steps.npm-cache.outputs.cache-hit == 'true' }}
-        run: npm ci --prefer-offline
 
       - name: Build Container
         run: npm run build:container

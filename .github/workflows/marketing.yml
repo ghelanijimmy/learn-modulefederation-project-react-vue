@@ -21,7 +21,7 @@ jobs:
           node-version: '19.7.0'
       - name: Get npm cache directory
         id: npm-cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           cache-name: cache-node-modules
         with:
@@ -30,13 +30,13 @@ jobs:
           restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-
       - name: Install dependencies
         if: ${{ steps.npm-cache.outputs.cache-hit != 'true' }}
-        run: npm install
+        run: npm ci
 
-      - name: Build Container
+      - name: Build Marketing
         run: npm run build:marketing
 
       - uses: shinyinc/action-aws-cli@v1.2
-      - run: aws s3 sync container/dist s3://${{ secrets.AWS_S3_BUCKET_NAME }}/marketing/latest
+      - run: aws s3 sync marketing/dist s3://${{ secrets.AWS_S3_BUCKET_NAME }}/marketing/latest
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
