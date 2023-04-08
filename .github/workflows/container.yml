@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - feature/github-actions
     paths:
       - 'container/**'
 
@@ -20,23 +21,19 @@ jobs:
           node-version: '19.7.0'
       - name: Get npm cache directory
         id: npm-cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           cache-name: cache-node-modules
         with:
-          path: |
-            ${{ steps.npm-cache-dir.outputs.dir }}
-            ~/.npm
-            '**/node_modules'
+          path: ~/.npm
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-      - if: ${{ steps.npm-cache.outputs.cache-hit != 'true' }}
-        name: Install dependencies
-        continue-on-error: true
-        run: npm install
+          restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-
+      - name: Install dependencies
+        if: ${{ steps.npm-cache.outputs.cache-hit != 'true' }}
+        run: npm ci
+      - name: Install dependencies
+        if: ${{ steps.npm-cache.outputs.cache-hit == 'true' }}
+        run: npm ci --prefer-offline
 
       - name: Build Container
         run: npm run build:container
