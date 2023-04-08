@@ -19,21 +19,23 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '19.7.0'
-      - name: Get npm cache directory
-        id: npm-cache
-        uses: actions/cache@v3
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-
-      - name: Install dependencies
-        if: ${{ steps.npm-cache.outputs.cache-hit != 'true' }}
-        run: npm ci
+          cache: 'npm'
+          cache-dependency-path: './package-lock.json'
+#      - name: Get npm cache directory
+#        id: npm-cache
+#        uses: actions/cache@v3
+#        env:
+#          cache-name: cache-node-modules
+#        with:
+#          path: ~/.npm
+#          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+#          restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-
+#      - name: Install dependencies
+#        if: ${{ steps.npm-cache.outputs.cache-hit != 'true' }}
+#        run: npm ci
 
       - name: Build Marketing
-        run: npm install webpack-merge && npm run build:marketing
+        run: npm run build:marketing
 
       - uses: shinyinc/action-aws-cli@v1.2
       - run: aws s3 sync marketing/dist s3://${{ secrets.AWS_S3_BUCKET_NAME }}/marketing/latest
