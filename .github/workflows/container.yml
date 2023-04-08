@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - main
-      - github-actions
+      - feature/github-actions
     paths:
       - 'container/**'
 
