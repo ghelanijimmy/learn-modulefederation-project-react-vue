@@ -32,12 +32,8 @@ jobs:
         if: ${{ steps.npm-cache.outputs.cache-hit != 'true' }}
         run: npm ci
 
-      - name: Install webpack-merge if cache-hit is true
-        if: ${{ steps.npm-cache.outputs.cache-hit == 'true' }}
-        run: npm install -g webpack-merge
-
       - name: Build Marketing
-        run: npm run build:marketing
+        run: npm install webpack-merge && npm run build:marketing
 
       - uses: shinyinc/action-aws-cli@v1.2
       - run: aws s3 sync marketing/dist s3://${{ secrets.AWS_S3_BUCKET_NAME }}/marketing/latest

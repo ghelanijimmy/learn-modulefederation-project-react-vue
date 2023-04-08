@@ -32,12 +32,8 @@ jobs:
         if: ${{ steps.npm-cache.outputs.cache-hit != 'true' }}
         run: npm ci
 
-      - name: Install webpack-merge if cache-hit is true
-        if: ${{ steps.npm-cache.outputs.cache-hit == 'true' }}
-        run: npm install -g webpack-merge
-
       - name: Build Container
-        run: npm run build:container
+        run: npm install webpack-merge && npm run build:container
         env:
           PRODUCTION_DOMAIN: ${{ secrets.PRODUCTION_DOMAIN }}
 
