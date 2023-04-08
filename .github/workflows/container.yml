@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - github-actions
     paths:
       - 'container/**'
 
@@ -24,18 +25,11 @@ jobs:
         env:
           cache-name: cache-node-modules
         with:
-          path: |
-            ${{ steps.npm-cache-dir.outputs.dir }}
-            ~/.npm
-            '**/node_modules'
+          path: ~/.npm
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-      - if: ${{ steps.npm-cache.outputs.cache-hit != 'true' }}
-        name: Install dependencies
-        continue-on-error: true
+          restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-
+      - name: Install dependencies
+        if: ${{ steps.npm-cache.outputs.cache-hit != 'true' }}
         run: npm install
 
       - name: Build Container
