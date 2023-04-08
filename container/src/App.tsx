@@ -7,7 +7,7 @@ export const App = () => {
   return (
     <BrowserRouter>
       <div>
-        <Header signedIn onSignOut={() => null} />
+        <Header signedIn={false} onSignOut={() => null} />
         <AppMarkers appTitle="MarketingApp">
           <MarketingApp />
         </AppMarkers>
