@@ -1,21 +1,23 @@
 const { merge } = require("webpack-merge");
+const common = require("./webpack.common.js");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
-const commonConfig = require("./webpack.common");
 const deps = require("../package.json").dependencies;
 
-const domain = process.env.PRODUCTION_DOMAIN;
-
-const prodConfig = {
-  mode: "production",
-  output: {
-    filename: "[name].[contenthash].js",
-    publicPath: "/container/latest/",
+const devConfig = {
+  mode: "development",
+  devtool: "inline-source-map",
+  devServer: {
+    port: 8080,
+    historyApiFallback: {
+      index: "index.html",
+    },
+    open: true,
   },
   plugins: [
     new ModuleFederationPlugin({
       name: "container",
       remotes: {
-        marketing: `marketing@${domain}/marketing/remoteEntry.js`,
+        marketing: "marketing@http://localhost:8081/remoteEntry.js",
       },
       shared: {
         ...deps,
@@ -24,4 +26,4 @@ const prodConfig = {
   ],
 };
 
-module.exports = merge(commonConfig, prodConfig);
+module.exports = merge(common, devConfig);
