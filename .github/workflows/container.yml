@@ -19,21 +19,27 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '19.7.0'
-          cache: 'npm'
-          cache-dependency-path: './package-lock.json'
+#          cache: 'npm'
+#          cache-dependency-path: './package-lock.json'
+
+      - name: Get node version
+        id: node
+        run: |
+          echo "::set-output name=version::$(node -v)"
+
+      - name: Get node_modules cache
+        uses: actions/cache@v3.0.2
+        id: node_modules
+        with:
+          path: |
+            **/node_modules
+            ~/.npm
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('./package-lock.json') }}-${{ steps.node.outputs.version }}
+          restore-keys: |
+            ${{ runner.os }}-node_modules-
+            ${{ runner.os }}-
+
       - run: npm install
-#      - name: Get npm cache directory
-#        id: npm-cache
-#        uses: actions/cache@v3
-#        env:
-#          cache-name: cache-node-modules
-#        with:
-#          path: ~/.npm
-#          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-#          restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-
-#      - name: Install dependencies
-#        if: ${{ steps.npm-cache.outputs.cache-hit != 'true' }}
-#        run: npm ci
 
       - name: Build Container
         run: npm run build:container
