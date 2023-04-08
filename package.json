@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "concurrently npm:start:*",
-    "start:marketing": "cd marketing && npm start",
-    "start:container": "cd container && npm start",
+    "start:marketing": "npm start -w marketing",
+    "start:container": "npm start -w container",
     "build": "concurrently npm:build:*",
-    "build:marketing": "cd marketing && npm run build",
-    "build:container": "cd container && npm run build"
+    "build:marketing": "npm run build -w marketing",
+    "build:container": "npm run build -w container"
   },
   "keywords": [],
   "author": "",
