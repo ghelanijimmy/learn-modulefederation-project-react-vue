@@ -19,8 +19,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '19.7.0'
-      - name: Install ts-node
-        run: npm install -g ts-node
       - name: Get npm cache directory
         id: npm-cache
         uses: actions/cache@v3
@@ -33,6 +31,9 @@ jobs:
       - name: Install dependencies
         if: ${{ steps.npm-cache.outputs.cache-hit != 'true' }}
         run: npm install
+      - name: Install ts-node if cache-hit is true
+        if: ${{ steps.npm-cache.outputs.cache-hit == 'true' }}
+        run: npm install ts-node
 
       - name: Build Container
         run: npm run build:container
