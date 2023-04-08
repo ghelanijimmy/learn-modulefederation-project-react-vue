@@ -1,5 +1,5 @@
 const { merge } = require("webpack-merge");
-const common = require("./webpack.common.ts");
+const common = require("./webpack.common.js");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 const deps = require("../package.json").dependencies;
 
@@ -7,17 +7,17 @@ const devConfig = {
   mode: "development",
   devtool: "inline-source-map",
   devServer: {
-    port: 8080,
+    port: 8081,
     historyApiFallback: {
       index: "index.html",
     },
-    open: true,
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: "container",
-      remotes: {
-        marketing: "marketing@http://localhost:8081/remoteEntry.js",
+      name: "marketing",
+      filename: "remoteEntry.js",
+      exposes: {
+        "./MarketingApp": "./src/bootstrap",
       },
       shared: {
         ...deps,
