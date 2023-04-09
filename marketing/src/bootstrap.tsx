@@ -1,20 +1,32 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { createMemoryHistory, LocationListener } from "history";
+import {
+  createMemoryHistory,
+  createBrowserHistory,
+  LocationListener,
+} from "history";
 import { App } from "./App";
 
 export type MarketingMountFunction = (
   el: Element,
-  options?: { onNavigate: LocationListener }
+  options?: {
+    onNavigate?: LocationListener;
+    useDefaultHistory?: boolean;
+  }
 ) => {
   onParentNavigate: LocationListener;
 };
 
-const mount: MarketingMountFunction = (el, options) => {
-  const history = createMemoryHistory();
+const mount: MarketingMountFunction = (
+  el,
+  { onNavigate, useDefaultHistory }
+) => {
+  const history = useDefaultHistory
+    ? createBrowserHistory()
+    : createMemoryHistory();
 
-  if (options?.onNavigate) {
-    history.listen(options.onNavigate);
+  if (onNavigate) {
+    history.listen(onNavigate);
   }
 
   ReactDOM.render(<App history={history} />, el);
@@ -32,7 +44,7 @@ if (process.env.NODE_ENV === "development") {
   const el = document.querySelector("#_marketing-dev-root");
 
   if (el) {
-    mount(el);
+    mount(el, { useDefaultHistory: true });
   }
 }
 

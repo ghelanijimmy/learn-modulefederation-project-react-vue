@@ -11,6 +11,7 @@ const devConfig = {
     historyApiFallback: {
       index: "/index.html",
     },
+    liveReload: true,
     devMiddleware: {
       writeToDisk: true,
     },
@@ -27,6 +28,9 @@ const devConfig = {
       },
     }),
   ],
+  optimization: {
+    runtimeChunk: "single",
+  },
 };
 
 module.exports = merge(common, devConfig);
