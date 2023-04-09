@@ -1,3 +1,5 @@
+import * as path from "path";
+
 const { merge } = require("webpack-merge");
 const common = require("./webpack.common");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
@@ -11,6 +13,12 @@ const devConfig = {
     historyApiFallback: {
       index: "/index.html",
     },
+    liveReload: true,
+    watchFiles: [
+      path.resolve(__dirname, "..", "..", "auth"),
+      path.resolve(__dirname, "..", "..", "dashboard"),
+      path.resolve(__dirname, "..", "..", "marketing"),
+    ],
     open: true,
   },
   plugins: [
@@ -24,6 +32,9 @@ const devConfig = {
       },
     }),
   ],
+  optimization: {
+    runtimeChunk: "single",
+  },
 };
 
 module.exports = merge(common, devConfig);

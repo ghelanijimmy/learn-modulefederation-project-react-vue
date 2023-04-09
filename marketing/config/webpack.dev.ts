@@ -11,6 +11,10 @@ const devConfig = {
     historyApiFallback: {
       index: "/index.html",
     },
+    liveReload: true,
+    devMiddleware: {
+      writeToDisk: true,
+    },
   },
   plugins: [
     new ModuleFederationPlugin({
@@ -24,6 +28,9 @@ const devConfig = {
       },
     }),
   ],
+  optimization: {
+    runtimeChunk: "single",
+  },
 };
 
 module.exports = merge(common, devConfig);

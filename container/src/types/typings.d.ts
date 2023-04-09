@@ -1,3 +1,4 @@
 declare module "marketing/MarketingApp" {
-  const mount: (el: Element) => void;
+  import { MarketingMountFunction } from "@mf/marketing/src/bootstrap";
+  const mount: MarketingMountFunction;
 }
