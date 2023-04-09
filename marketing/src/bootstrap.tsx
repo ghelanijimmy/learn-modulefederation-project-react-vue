@@ -6,9 +6,11 @@ import { App } from "./App";
 export type MarketingMountFunction = (
   el: Element,
   options?: { onNavigate: LocationListener }
-) => void;
+) => {
+  onParentNavigate: LocationListener;
+};
 
-const mount = (el: Element, options?: { onNavigate: LocationListener }) => {
+const mount: MarketingMountFunction = (el, options) => {
   const history = createMemoryHistory();
 
   if (options?.onNavigate) {
@@ -16,6 +18,14 @@ const mount = (el: Element, options?: { onNavigate: LocationListener }) => {
   }
 
   ReactDOM.render(<App history={history} />, el);
+
+  return {
+    onParentNavigate({ pathname: nextPathname }) {
+      const { pathname } = history.location;
+
+      if (pathname !== nextPathname) history.push(nextPathname);
+    },
+  };
 };
 
 if (process.env.NODE_ENV === "development") {

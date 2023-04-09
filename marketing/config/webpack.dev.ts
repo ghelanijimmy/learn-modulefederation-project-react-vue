@@ -11,6 +11,9 @@ const devConfig = {
     historyApiFallback: {
       index: "/index.html",
     },
+    devMiddleware: {
+      writeToDisk: true,
+    },
   },
   plugins: [
     new ModuleFederationPlugin({
