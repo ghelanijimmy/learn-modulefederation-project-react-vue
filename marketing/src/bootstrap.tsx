@@ -12,6 +12,7 @@ export type MarketingMountFunction = (
   options?: {
     onNavigate?: LocationListener;
     useDefaultHistory?: boolean;
+    initialPath?: string;
   }
 ) => {
   onParentNavigate: LocationListener;
@@ -19,11 +20,13 @@ export type MarketingMountFunction = (
 
 const mount: MarketingMountFunction = (
   el,
-  { onNavigate, useDefaultHistory }
+  { onNavigate, useDefaultHistory, initialPath }
 ) => {
   const history = useDefaultHistory
     ? createBrowserHistory()
-    : createMemoryHistory();
+    : createMemoryHistory({
+        initialEntries: [initialPath],
+      });
 
   if (onNavigate) {
     history.listen(onNavigate);

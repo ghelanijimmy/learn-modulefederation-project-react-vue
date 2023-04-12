@@ -8,6 +8,9 @@ const deps = require("../package.json").dependencies;
 const devConfig = {
   mode: "development",
   devtool: "inline-source-map",
+  output: {
+    publicPath: "http://localhost:8080/",
+  },
   devServer: {
     port: 8080,
     historyApiFallback: {
@@ -26,6 +29,7 @@ const devConfig = {
       name: "container",
       remotes: {
         marketing: "marketing@http://localhost:8081/remoteEntry.js",
+        auth: "auth@http://localhost:8082/remoteEntry.js",
       },
       shared: {
         ...deps,

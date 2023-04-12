@@ -7,23 +7,26 @@ import {
 } from "history";
 import { App } from "./App";
 
-export type MarketingMountFunction = (
+export type AuthMountFunction = (
   el: Element,
   options?: {
     onNavigate?: LocationListener;
     useDefaultHistory?: boolean;
+    initialPath?: string;
   }
 ) => {
   onParentNavigate: LocationListener;
 };
 
-const mount: MarketingMountFunction = (
+const mount: AuthMountFunction = (
   el,
-  { onNavigate, useDefaultHistory }
+  { onNavigate, useDefaultHistory, initialPath }
 ) => {
   const history = useDefaultHistory
     ? createBrowserHistory()
-    : createMemoryHistory();
+    : createMemoryHistory({
+        initialEntries: [initialPath],
+      });
 
   if (onNavigate) {
     history.listen(onNavigate);
