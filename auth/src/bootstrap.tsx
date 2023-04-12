@@ -13,6 +13,7 @@ export type AuthMountFunction = (
 		onNavigate?: LocationListener;
 		useDefaultHistory?: boolean;
 		initialPath?: string;
+		onSignIn?: () => void;
 	},
 ) => {
 	onParentNavigate: LocationListener;
@@ -20,7 +21,7 @@ export type AuthMountFunction = (
 
 const mount: AuthMountFunction = (
 	el,
-	{ onNavigate, useDefaultHistory, initialPath },
+	{ onNavigate, useDefaultHistory, initialPath, onSignIn },
 ) => {
 	const history = useDefaultHistory
 		? createBrowserHistory()
@@ -30,7 +31,7 @@ const mount: AuthMountFunction = (
 		history.listen(onNavigate);
 	}
 
-	ReactDOM.render(<App history={history} />, el);
+	ReactDOM.render(<App history={history} onSignIn={onSignIn} />, el);
 
 	return {
 		onParentNavigate({ pathname: nextPathname }) {
