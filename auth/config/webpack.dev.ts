@@ -7,7 +7,7 @@ const devConfig = {
   mode: "development",
   devtool: "inline-source-map",
   devServer: {
-    port: 8081,
+    port: 8082,
     historyApiFallback: {
       index: "/index.html",
     },
@@ -18,10 +18,10 @@ const devConfig = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: "marketing",
+      name: "auth",
       filename: "remoteEntry.js",
       exposes: {
-        "./MarketingApp": "./src/bootstrap",
+        "./AuthApp": "./src/bootstrap",
       },
       shared: {
         ...deps,

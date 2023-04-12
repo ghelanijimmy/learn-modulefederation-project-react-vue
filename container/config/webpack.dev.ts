@@ -32,9 +32,6 @@ const devConfig = {
       },
     }),
   ],
-  optimization: {
-    runtimeChunk: "single",
-  },
 };
 
 module.exports = merge(common, devConfig);
