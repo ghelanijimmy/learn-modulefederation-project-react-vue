@@ -16,7 +16,7 @@ function Copyright() {
 		<Typography variant="body2" color="textSecondary" align="center">
 			{'Copyright © '}
 			<MaterialLink component={Link} to="/" color="inherit">
-        Your Website
+				Your Website
 			</MaterialLink>{' '}
 			{new Date().getFullYear()}
 			{'.'}
@@ -79,7 +79,7 @@ export default function Album() {
 							color="textPrimary"
 							gutterBottom
 						>
-              Home Page
+							Home Page
 						</Typography>
 						<Typography
 							variant="h5"
@@ -87,23 +87,30 @@ export default function Album() {
 							color="textSecondary"
 							paragraph
 						>
-              Something short and leading about the collection below—its
-              contents, the creator, etc. Make it short and sweet, but not too
-              short so folks don&apos;t simply skip over it entirely.
+							Something short and leading about the collection
+							below—its contents, the creator, etc. Make it short
+							and sweet, but not too short so folks don&apos;t
+							simply skip over it entirely.
 						</Typography>
 						<div className={classes.heroButtons}>
-							<Grid container spacing={2} justify="center">
+							<Grid container spacing={2} justifyContent="center">
 								<Grid item>
 									<Link to="/pricing">
-										<Button variant="contained" color="primary">
-                      Pricing
+										<Button
+											variant="contained"
+											color="primary"
+										>
+											Pricing
 										</Button>
 									</Link>
 								</Grid>
 								<Grid item>
 									<Link to="/pricing">
-										<Button variant="outlined" color="primary">
-                      Pricing
+										<Button
+											variant="outlined"
+											color="primary"
+										>
+											Pricing
 										</Button>
 									</Link>
 								</Grid>
@@ -122,21 +129,28 @@ export default function Album() {
 										image="https://source.unsplash.com/random"
 										title="Image title"
 									/>
-									<CardContent className={classes.cardContent}>
-										<Typography gutterBottom variant="h5" component="h2">
-                      Heading
+									<CardContent
+										className={classes.cardContent}
+									>
+										<Typography
+											gutterBottom
+											variant="h5"
+											component="h2"
+										>
+											Heading
 										</Typography>
 										<Typography>
-                      This is a media card. You can use this section to describe
-                      the content.
+											This is a media card. You can use
+											this section to describe the
+											content.
 										</Typography>
 									</CardContent>
 									<CardActions>
 										<Button size="small" color="primary">
-                      View
+											View
 										</Button>
 										<Button size="small" color="primary">
-                      Edit
+											Edit
 										</Button>
 									</CardActions>
 								</Card>
@@ -148,7 +162,7 @@ export default function Album() {
 			{/* Footer */}
 			<footer className={classes.footer}>
 				<Typography variant="h6" align="center" gutterBottom>
-          Footer
+					Footer
 				</Typography>
 				<Typography
 					variant="subtitle1"
@@ -156,7 +170,7 @@ export default function Album() {
 					color="textSecondary"
 					component="p"
 				>
-          Something here to give the footer a purpose!
+					Something here to give the footer a purpose!
 				</Typography>
 				<Copyright />
 			</footer>

@@ -57,7 +57,7 @@ export default function SignUp({ onSignIn }: { onSignIn: () => void }) {
 					<LockOutlinedIcon />
 				</Avatar>
 				<Typography component="h1" variant="h5">
-          Sign up
+					Sign up
 				</Typography>
 				<form
 					onSubmit={(e) => e.preventDefault()}
@@ -113,7 +113,12 @@ export default function SignUp({ onSignIn }: { onSignIn: () => void }) {
 						</Grid>
 						<Grid item xs={12}>
 							<FormControlLabel
-								control={<Checkbox value="allowExtraEmails" color="primary" />}
+								control={
+									<Checkbox
+										value="allowExtraEmails"
+										color="primary"
+									/>
+								}
 								label="I want to receive inspiration, marketing promotions and updates via email."
 							/>
 						</Grid>
@@ -126,11 +131,13 @@ export default function SignUp({ onSignIn }: { onSignIn: () => void }) {
 						className={classes.submit}
 						onClick={onSignIn}
 					>
-            Sign Up
+						Sign Up
 					</Button>
-					<Grid container justify="flex-end">
+					<Grid container justifyContent="center">
 						<Grid item>
-							<Link to="/auth/signin">Already have an account? Sign in</Link>
+							<Link to="/auth/signin">
+								Already have an account? Sign in
+							</Link>
 						</Grid>
 					</Grid>
 				</form>

@@ -8,25 +8,23 @@ import {
 import { App } from './App';
 
 export type AuthMountFunction = (
-  el: Element,
-  options?: {
-    onNavigate?: LocationListener;
-    useDefaultHistory?: boolean;
-    initialPath?: string;
-  }
+	el: Element,
+	options?: {
+		onNavigate?: LocationListener;
+		useDefaultHistory?: boolean;
+		initialPath?: string;
+	},
 ) => {
-  onParentNavigate: LocationListener;
+	onParentNavigate: LocationListener;
 };
 
 const mount: AuthMountFunction = (
 	el,
-	{ onNavigate, useDefaultHistory, initialPath }
+	{ onNavigate, useDefaultHistory, initialPath },
 ) => {
 	const history = useDefaultHistory
 		? createBrowserHistory()
-		: createMemoryHistory({
-			initialEntries: [initialPath],
-		});
+		: createMemoryHistory({ initialEntries: [initialPath] });
 
 	if (onNavigate) {
 		history.listen(onNavigate);
