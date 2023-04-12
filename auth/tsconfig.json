@@ -1,21 +1,17 @@
 {
+  "extends": "../tsconfig.json",
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "noImplicitAny": true,
-    "module": "ESNext",
-    "target": "ESNext",
-    "allowJs": true,
-    "preserveConstEnums": true,
-    "sourceMap": true,
-    "declaration": true,
-    "declarationMap": true,
-    "moduleResolution": "Node",
-    "rootDir": ".",
-    "outDir": "dist",
-    "composite": true,
-    "jsx": "react",
-    "esModuleInterop": true
+    "paths": {
+      "@mf/marketing": ["../marketing"],
+      "@mf/dashboard": ["../dashboard"],
+      "@mf/container": ["../container"],
+    }
   },
+  "references": [
+    {"path": "../marketing/tsconfig.json"},
+    {"path": "../dashboard/tsconfig.json"},
+    {"path": "../container/tsconfig.json"}
+  ],
   "include": ["src/**/*"],
   "ts-node": {
     "compilerOptions": {

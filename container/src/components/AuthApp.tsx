@@ -1,14 +1,14 @@
 import React, { useRef, useEffect } from 'react';
-import { mount as MarketingMount } from 'marketing/MarketingApp';
+import { mount as AuthMount } from 'auth/AuthApp';
 import { useHistory } from 'react-router-dom';
-import { MarketingMountFunction } from '@mf/marketing/src/bootstrap';
+import { AuthMountFunction } from '@mf/auth/src/bootstrap';
 
-export const MarketingApp = () => {
+export const AuthApp = (props: { onSignIn: () => void }) => {
 	const ref = useRef(null);
 	const history = useHistory();
 
 	useEffect(() => {
-		const { onParentNavigate } = (MarketingMount as MarketingMountFunction)(
+		const { onParentNavigate } = (AuthMount as AuthMountFunction)(
 			ref.current,
 			{
 				onNavigate: ({ pathname: nextPathname }) => {
@@ -16,6 +16,7 @@ export const MarketingApp = () => {
 					if (pathname !== nextPathname) history.push(nextPathname);
 				},
 				initialPath: history.location.pathname,
+				onSignIn: props.onSignIn,
 			},
 		);
 		history.listen(onParentNavigate);
@@ -23,4 +24,4 @@ export const MarketingApp = () => {
 
 	return <div ref={ref} />;
 };
-export default MarketingApp;
+export default AuthApp;

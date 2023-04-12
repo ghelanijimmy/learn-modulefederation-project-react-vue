@@ -1,0 +1,79 @@
+name: deploy-auth
+on:
+  push:
+    branches:
+      - main
+      - feature/github-actions
+    paths:
+      - 'auth/**'
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+    paths:
+      - 'auth/**'
+
+defaults:
+  run:
+    working-directory: .
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '19.7.0'
+      #          cache: 'npm'
+      #          cache-dependency-path: './package-lock.json'
+      - name: Get node version
+        id: node
+        run: |
+          echo "::set-output name=version::$(node -v)"
+
+      - name: Get node_modules cache
+        uses: actions/cache@v3.0.2
+        id: node_modules
+        with:
+          path: |
+            **/node_modules
+            ~/.npm
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}-${{ steps.node.outputs.version }}
+          restore-keys: |
+            ${{ runner.os }}-node_modules-
+            ${{ runner.os }}-
+
+      - run: npm install
+      #      - name: Get npm cache directory
+      #        id: npm-cache
+      #        uses: actions/cache@v3
+      #        env:
+      #          cache-name: cache-node-modules
+      #        with:
+      #          path: ~/.npm
+      #          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+      #          restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-
+      #      - name: Install dependencies
+      #        if: ${{ steps.npm-cache.outputs.cache-hit != 'true' }}
+      #        run: npm ci
+
+      - name: Build Auth
+        run: npm run build:auth
+
+      - uses: shinyinc/action-aws-cli@v1.2
+      - run: aws s3 sync auth/dist s3://${{ secrets.AWS_S3_BUCKET_NAME }}/auth/latest
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: "ca-central-1"
+      - run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }} --paths "/auth/latest/index.html"
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: "ca-central-1"
+      - run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }} --paths "/auth/latest/remoteEntry.js"
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: "ca-central-1"

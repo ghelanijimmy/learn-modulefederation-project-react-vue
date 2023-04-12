@@ -7,32 +7,31 @@ import {
 } from 'history';
 import { App } from './App';
 
-export type MarketingMountFunction = (
-  el: Element,
-  options?: {
-    onNavigate?: LocationListener;
-    useDefaultHistory?: boolean;
-    initialPath?: string;
-  }
+export type AuthMountFunction = (
+	el: Element,
+	options?: {
+		onNavigate?: LocationListener;
+		useDefaultHistory?: boolean;
+		initialPath?: string;
+		onSignIn?: () => void;
+	},
 ) => {
-  onParentNavigate: LocationListener;
+	onParentNavigate: LocationListener;
 };
 
-const mount: MarketingMountFunction = (
+const mount: AuthMountFunction = (
 	el,
-	{ onNavigate, useDefaultHistory, initialPath }
+	{ onNavigate, useDefaultHistory, initialPath, onSignIn },
 ) => {
 	const history = useDefaultHistory
 		? createBrowserHistory()
-		: createMemoryHistory({
-			initialEntries: [initialPath],
-		});
+		: createMemoryHistory({ initialEntries: [initialPath] });
 
 	if (onNavigate) {
 		history.listen(onNavigate);
 	}
 
-	ReactDOM.render(<App history={history} />, el);
+	ReactDOM.render(<App history={history} onSignIn={onSignIn} />, el);
 
 	return {
 		onParentNavigate({ pathname: nextPathname }) {
@@ -44,7 +43,7 @@ const mount: MarketingMountFunction = (
 };
 
 if (process.env.NODE_ENV === 'development') {
-	const el = document.querySelector('#_marketing-dev-root');
+	const el = document.querySelector('#_auth-dev-root');
 
 	if (el) {
 		mount(el, { useDefaultHistory: true });

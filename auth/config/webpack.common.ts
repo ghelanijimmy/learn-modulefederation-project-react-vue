@@ -29,7 +29,7 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: './public/index.html',
 			historyApiFallback: true,
-			excludeChunks: ['marketing'],
+			excludeChunks: ['auth'],
 		}),
 	],
 };
