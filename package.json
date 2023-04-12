@@ -11,7 +11,9 @@
     "build": "concurrently npm:build:*",
     "build:marketing": "npm run build -w marketing",
     "build:container": "npm run build -w container",
-    "build:auth": "npm run build -w auth"
+    "build:auth": "npm run build -w auth",
+    "lint": "eslint --ignore-path .eslintignore --ext .js,.jsx,.ts,.tsx .",
+    "lint:fix": "eslint --ignore-path .eslintignore --ext .js,.jsx,.ts,.tsx . --fix"
   },
   "keywords": [],
   "author": "",
