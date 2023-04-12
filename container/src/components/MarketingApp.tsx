@@ -19,3 +19,4 @@ export const MarketingApp = () => {
 
   return <div ref={ref} />;
 };
+export default MarketingApp;
