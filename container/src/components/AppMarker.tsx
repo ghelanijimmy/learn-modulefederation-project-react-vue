@@ -1,9 +1,6 @@
 import React, { FC } from "react";
 
-export const AppMarkers: FC<{ appTitle: string }> = ({
-  appTitle,
-  children,
-}) => {
+export const AppMarker: FC<{ appTitle: string }> = ({ appTitle, children }) => {
   return (
     <div style={{ border: "1px solid black", position: "relative" }}>
       <div

@@ -1,7 +1,7 @@
 import React, { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import { AppMarkers } from "./components/AppMarkers";
+import { AppMarker } from "./components/AppMarker";
 import { Header } from "./components/Header";
 import { createGenerateClassName, StylesProvider } from "@material-ui/core";
 import { Progress } from "./components/Progress";
@@ -21,14 +21,14 @@ export const App = () => {
         <Suspense fallback={<Progress />}>
           <Switch>
             <Route path="/auth">
-              <AppMarkers appTitle="AuthApp">
+              <AppMarker appTitle="AuthApp">
                 <AuthLazy />
-              </AppMarkers>
+              </AppMarker>
             </Route>
             <Route path="/">
-              <AppMarkers appTitle="MarketingApp">
+              <AppMarker appTitle="MarketingApp">
                 <MarketingLazy />
-              </AppMarkers>
+              </AppMarker>
             </Route>
           </Switch>
         </Suspense>
