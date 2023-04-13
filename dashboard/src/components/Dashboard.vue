@@ -256,7 +256,7 @@
 				>
 					<Column>
 						<template #header> Logo </template>
-						<template #body="slotProps">
+						<template #body="slotProps: SlotProps">
 							<img
 								:src="
 									'assets/layout/images/product/' +
@@ -278,7 +278,7 @@
 						:sortable="true"
 					></Column>
 					<Column field="price" header="Price" :sortable="true">
-						<template #body="slotProps">
+						<template #body="slotProps: SlotProps">
 							{{ formatCurrency(slotProps.data.price) }}
 						</template>
 					</Column>
@@ -324,6 +324,12 @@ import DataTable from 'primevue/datatable';
 import Chart from 'primevue/chart';
 import ProgressBar from 'primevue/progressbar';
 
+interface SlotProps {
+	data: {
+		image?: string;
+		price?: number;
+	}
+}
 export default defineComponent({
 	name: 'DashboardView',
 	components: {
@@ -399,7 +405,6 @@ export default defineComponent({
 	},
 });
 </script>
-
 <style lang="scss" scoped>
 @media screen and (max-width: 960px) {
 	::v-deep(.p-datatable) {

@@ -2,6 +2,7 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "isolatedModules": true,
+    "noImplicitAny": false,
     "paths": {
       "@mf/auth": ["../auth"],
       "@mf/marketing": ["../marketing"],
