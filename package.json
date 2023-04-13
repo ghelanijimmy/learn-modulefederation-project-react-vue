@@ -8,10 +8,12 @@
     "start:marketing": "npm start -w marketing",
     "start:container": "npm start -w container",
     "start:auth": "npm start -w auth",
+    "start:dashboard": "npm start -w dashboard",
     "build": "concurrently npm:build:*",
     "build:marketing": "npm run build -w marketing",
     "build:container": "npm run build -w container",
     "build:auth": "npm run build -w auth",
+    "build:dashboard": "npm run build -w dashboard",
     "lint": "eslint --ignore-path .eslintignore --ext .js,.jsx,.ts,.tsx .",
     "lint:fix": "eslint --ignore-path .eslintignore --ext .js,.jsx,.ts,.tsx . --fix"
   },

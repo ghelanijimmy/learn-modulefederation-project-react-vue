@@ -10,7 +10,7 @@
     "@material-ui/icons": "^4.9.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.3.4"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
@@ -18,8 +18,9 @@
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.1",
     "@types/node": "^18.15.11",
-    "@types/react": "^17.0.56",
+    "@types/react": "^17.0.58",
     "@types/react-dom": "^18.0.11",
+    "@types/react-router-dom": "^5.3.3",
     "@types/webpack": "^5.28.1",
     "@typescript-eslint/eslint-plugin": "^5.58.0",
     "@typescript-eslint/parser": "^5.58.0",
@@ -37,5 +38,8 @@
     "webpack-cli": "^5.0.1",
     "webpack-dev-server": "^4.13.2",
     "webpack-merge": "^5.8.0"
+  },
+  "resolutions": {
+    "@types/react": "^17.0.58"
   }
 }
