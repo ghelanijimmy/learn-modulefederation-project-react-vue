@@ -9,6 +9,5 @@ declare module 'auth/AuthApp' {
 }
 
 declare module 'dashboard/DashboardApp' {
-	import { DashboardMountFunction } from '@mf/dashboard/src/bootstrap';
-	export const mount: DashboardMountFunction;
+	export const mount: (el: Element) => void;
 }
