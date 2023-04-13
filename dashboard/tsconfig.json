@@ -1,10 +1,12 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
+    "isolatedModules": true,
+    "noImplicitAny": false,
     "paths": {
       "@mf/auth": ["../auth"],
       "@mf/marketing": ["../marketing"],
-      "@mf/container": ["../container"],
+      "@mf/container": ["../container"]
     }
   },
   "references": [
@@ -17,5 +19,8 @@
     "compilerOptions": {
       "module": "commonjs"
     }
-  }
+  },
+  "files": [
+    "shims-vue.d.ts"
+  ]
 }

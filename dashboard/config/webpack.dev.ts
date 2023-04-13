@@ -1,5 +1,3 @@
-const path = require('path');
-
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
@@ -9,28 +7,27 @@ const devConfig = {
 	mode: 'development',
 	devtool: 'inline-source-map',
 	output: {
-		publicPath: 'http://localhost:8080/',
+		publicPath: 'http://localhost:8083/',
 	},
 	devServer: {
-		port: 8080,
+		port: 8083,
 		historyApiFallback: {
 			index: '/index.html',
 		},
+		headers: {
+			'Access-Control-Allow-Origin': '*',
+		},
 		liveReload: true,
-		watchFiles: [
-			path.resolve(__dirname, '..', '..', 'auth'),
-			path.resolve(__dirname, '..', '..', 'dashboard'),
-			path.resolve(__dirname, '..', '..', 'marketing'),
-		],
-		open: true,
+		devMiddleware: {
+			writeToDisk: true,
+		},
 	},
 	plugins: [
 		new ModuleFederationPlugin({
-			name: 'container',
-			remotes: {
-				marketing: 'marketing@http://localhost:8081/remoteEntry.js',
-				auth: 'auth@http://localhost:8082/remoteEntry.js',
-				dashboard: 'dashboard@http://localhost:8083/remoteEntry.js',
+			name: 'dashboard',
+			filename: 'remoteEntry.js',
+			exposes: {
+				'./DashboardApp': './src/bootstrap',
 			},
 			shared: {
 				...deps,

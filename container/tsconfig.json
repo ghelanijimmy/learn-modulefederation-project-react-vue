@@ -4,7 +4,7 @@
     "paths": {
       "@mf/auth": ["../auth"],
       "@mf/marketing": ["../marketing"],
-      "@mf/dashboard": ["../dashboard"],
+      "@mf/dashboard": ["../dashboard"]
     }
   },
   "references": [
