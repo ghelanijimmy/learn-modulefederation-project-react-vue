@@ -31,7 +31,7 @@
 					<span>TV</span>
 				</div>
 				<div class="highlight-details">
-					<i class="pi pi-search"></i>
+					<i class="pi pi-search" />
 					<span>Total Queries</span>
 					<span class="count">523</span>
 				</div>
@@ -46,7 +46,7 @@
 					<span>TI</span>
 				</div>
 				<div class="highlight-details">
-					<i class="pi pi-question-circle"></i>
+					<i class="pi pi-question-circle" />
 					<span>Total Issues</span>
 					<span class="count">81</span>
 				</div>
@@ -61,7 +61,7 @@
 					<span>OI</span>
 				</div>
 				<div class="highlight-details">
-					<i class="pi pi-filter"></i>
+					<i class="pi pi-filter" />
 					<span>Open Issues</span>
 					<span class="count">21</span>
 				</div>
@@ -76,7 +76,7 @@
 					<span>CI</span>
 				</div>
 				<div class="highlight-details">
-					<i class="pi pi-check"></i>
+					<i class="pi pi-check" />
 					<span>Closed Issues</span>
 					<span class="count">60</span>
 				</div>
@@ -88,54 +88,54 @@
 				<ul class="task-list">
 					<li>
 						<Checkbox
+							v-model="tasksCheckbox"
 							name="task"
 							value="reports"
-							v-model="tasksCheckbox"
 						/>
 						<span class="task-name">Sales Reports</span>
 						<i class="pi pi-chart-bar" />
 					</li>
 					<li>
 						<Checkbox
+							v-model="tasksCheckbox"
 							name="task"
 							value="invoices"
-							v-model="tasksCheckbox"
 						/>
 						<span class="task-name">Pay Invoices</span>
 						<i class="pi pi-dollar" />
 					</li>
 					<li>
 						<Checkbox
+							v-model="tasksCheckbox"
 							name="task"
 							value="dinner"
-							v-model="tasksCheckbox"
 						/>
 						<span class="task-name">Dinner with Tony</span>
 						<i class="pi pi-user" />
 					</li>
 					<li>
 						<Checkbox
+							v-model="tasksCheckbox"
 							name="task"
 							value="meeting"
-							v-model="tasksCheckbox"
 						/>
 						<span class="task-name">Client Meeting</span>
 						<i class="pi pi-users" />
 					</li>
 					<li>
 						<Checkbox
+							v-model="tasksCheckbox"
 							name="task"
 							value="theme"
-							v-model="tasksCheckbox"
 						/>
 						<span class="task-name">New Theme</span>
 						<i class="pi pi-globe" />
 					</li>
 					<li>
 						<Checkbox
+							v-model="tasksCheckbox"
 							name="task"
 							value="flight"
-							v-model="tasksCheckbox"
 						/>
 						<span class="task-name">Flight Ticket</span>
 						<i class="pi pi-briefcase" />
@@ -151,7 +151,7 @@
 						<Dropdown
 							v-model="dropdownCity"
 							:options="dropdownCities"
-							optionLabel="name"
+							option-label="name"
 							placeholder="Select a City"
 						/>
 					</div>
@@ -226,7 +226,7 @@
 							<h5 class="activity p-m-0">Income</h5>
 							<div class="count">$900</div>
 						</div>
-						<ProgressBar :value="95" :showValue="false" />
+						<ProgressBar :value="95" :show-value="false" />
 					</li>
 					<li>
 						<div class="p-d-flex p-jc-between p-ai-center p-mb-3">
@@ -238,7 +238,7 @@
 								$250
 							</div>
 						</div>
-						<ProgressBar :value="24" :showValue="false" />
+						<ProgressBar :value="24" :show-value="false" />
 					</li>
 				</ul>
 			</Panel>
@@ -256,7 +256,9 @@
 				>
 					<Column>
 						<template #header> Logo </template>
-						<template #body="slotProps: SlotProps">
+						<template
+							#body="slotProps: { data: { image: string } }"
+						>
 							<img
 								:src="
 									'assets/layout/images/product/' +
@@ -267,18 +269,16 @@
 							/>
 						</template>
 					</Column>
-					<Column
-						field="name"
-						header="Name"
-						:sortable="true"
-					></Column>
+					<Column field="name" header="Name" :sortable="true" />
 					<Column
 						field="category"
 						header="Category"
 						:sortable="true"
-					></Column>
+					/>
 					<Column field="price" header="Price" :sortable="true">
-						<template #body="slotProps: SlotProps">
+						<template
+							#body="slotProps: { data: { price: number } }"
+						>
 							{{ formatCurrency(slotProps.data.price) }}
 						</template>
 					</Column>
@@ -289,12 +289,12 @@
 								icon="pi pi-search"
 								type="button"
 								class="p-button-success p-mr-2 p-mb-1"
-							></ButtonVue>
+							/>
 							<ButtonVue
 								icon="pi pi-times"
 								type="button"
 								class="p-button-danger p-mb-1"
-							></ButtonVue>
+							/>
 						</template>
 					</Column>
 				</DataTable>
@@ -324,12 +324,6 @@ import DataTable from 'primevue/datatable';
 import Chart from 'primevue/chart';
 import ProgressBar from 'primevue/progressbar';
 
-interface SlotProps {
-	data: {
-		image?: string;
-		price?: number;
-	}
-}
 export default defineComponent({
 	name: 'DashboardView',
 	components: {
