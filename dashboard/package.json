@@ -2,7 +2,8 @@
   "name": "@mf/dashboard",
   "version": "1.0.0",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack serve --config config/webpack.dev.ts",
+    "build": "webpack --config config/webpack.prod.ts"
   },
   "dependencies": {
     "chart.js": "3.7.1",
