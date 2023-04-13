@@ -1,7 +1,11 @@
+import { createApp } from 'vue';
+import Dashboard from './components/Dashboard.vue';
+
 export type DashboardMountFunction = (el: Element) => void;
 
 const mount: DashboardMountFunction = (el) => {
-	console.log(el);
+	const app = createApp(Dashboard);
+	app.mount(el);
 };
 
 if (process.env.NODE_ENV === 'development') {

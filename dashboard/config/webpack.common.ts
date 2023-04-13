@@ -2,12 +2,15 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 
 module.exports = {
-	entry: './src/index.js',
+	entry: './src/index.ts',
 	output: {
 		filename: '[name].[contenthash].js',
 	},
 	resolve: {
-		extensions: ['.js', '.vue'],
+		extensions: ['.js', '.ts', ',jsx', '.tsx', '.vue'],
+		alias: {
+			vue: 'vue/dist/vue.esm-bundler.js',
+		},
 	},
 	module: {
 		rules: [
@@ -15,6 +18,9 @@ module.exports = {
 				test: /\.(ts)$/i,
 				loader: 'ts-loader',
 				exclude: ['/node_modules/'],
+				options: {
+					appendTsSuffixTo: [/\.vue$/],
+				},
 			},
 			{
 				test: /\.(png|jpe?g|gif|woff|svg|eot|ttf)$/i,
